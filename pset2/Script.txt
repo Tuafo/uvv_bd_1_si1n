@@ -1,16 +1,16 @@
 /* QUESTÃO 01: prepare um relatorio que mostre a madia salarial dos funcionarios de cada departamento. */
 
 SELECT 
-    numero_departamento 	      AS departamento,
-	  AVG(salario)		            AS media_salarial
+    numero_departamento 	      	AS departamento,
+	  AVG(salario)		        AS media_salarial
 FROM funcionario
 GROUP BY numero_departamento;
 
 /* QUESTÃO 02: prepare um relatorio que mostre a media salarial dos homens e das mulheres. */
 
 SELECT 
-	  sexo 		                    AS genero,
-	  AVG(salario) 	              AS media_salarial
+	  sexo 		                AS genero,
+	  AVG(salario) 	              	AS media_salarial
 FROM funcionario
 GROUP BY sexo;
 
