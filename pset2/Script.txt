@@ -46,10 +46,10 @@ o departamento onde eles trabalham e, para cada funcionario, tambem liste o nome
 a idade em anos de cada dependente e o sexo (o sexo NAO DEVE aparecer como M ou F, deve aparecer
 como “Masculino” ou “Feminino”). */
 
-SELECT CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome),             		AS nome_completo_funcionario
-	numero_departamento,                                                    	AS departamento
-	CONCAT(nome_dependente, ' ', ultimo_nome),                              	AS nome_completo_dependente
-	DATE_PART('year', CURRENT_DATE) - DATE_PART('year', d.data_nascimento), 	AS idade_dependente
+SELECT CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome)             		AS nome_completo_funcionario,
+	numero_departamento                                                    		AS departamento,
+	CONCAT(nome_dependente, ' ', ultimo_nome)                              		AS nome_completo_dependente,
+	DATE_PART('year', CURRENT_DATE) - DATE_PART('year', d.data_nascimento) 		AS idade_dependente,
 CASE 
 	WHEN d.sexo = 'M' THEN 'Masculino'	
 	WHEN d.sexo = 'F' THEN 'Feminino'
