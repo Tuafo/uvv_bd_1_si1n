@@ -33,28 +33,26 @@ obedece ao seguinte criterio: se o salario atual do funcionario e inferior a 35.
 reajuste deve ser de 20%, e se o salario atual do funcionario for igual ou superior a
 35.000 o reajuste deve ser de 15%. */
 
-SELECT 
- 	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 			     AS nome,
- 	DATE_PART ('year', NOW()) - DATE_PART ('year', data_nascimento)		     AS idade, 
-	salario 								     AS salario_atual, 
-CASE 
-    WHEN salario < 35000 THEN salario + salario * 0.2
-	WHEN salario >= 35000 THEN salario + salario * 0.15 
-END 										     AS salario_reajustado
+?????????????
 
 /* QUESTÃO 05: prepare um relatorio que liste, para cada departamento, o nome
 do gerente e o nome dos funcionarios. Ordene esse relatorio por nome do departamento 
 (em ordem crescente) e por salario dos funcionários (em ordem decrescente). */
 
-SELECT 
- 	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 			      AS nome,
- 	DATE_PART ('year', NOW()) - DATE_PART ('year', data_nascimento)		      AS idade, 
-	salario 								      AS salario_atual, 
+??????????????
 
-CASE 
-	WHEN salario < 35000 THEN salario + salario * 0.2
-	WHEN salario >= 35000 THEN salario + salario * 0.15 
+/* QUESTÃO 06: prepare um relatorio que mostre o nome completo dos funcionarios que tem dependentes, 
+o departamento onde eles trabalham e, para cada funcionario, tambem liste o nome completo dos dependentes, 
+a idade em anos de cada dependente e o sexo (o sexo NAO DEVE aparecer como M ou F, deve aparecer
+como “Masculino” ou “Feminino”). */
 
-END 										      AS salario_reajustado
-FROM funcionario;
+SELECT
+	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 			   AS funcionario,
+	numero_departamento 							   AS departamento,
+	CONCAT(nome_dependente,' ', ultimo_nome) 				   AS dependente, 
+	DATE_PART ('year', NOW()) - DATE_PART ('year', d.data_nascimento) 	   AS idade_dependente,
+CASE
+	WHEN d.sexo = 'M' THEN 'Masculino'
+	WHEN d.sexo = 'F' THEN 'Feminino'
+END 										   AS genero_dependente
 
