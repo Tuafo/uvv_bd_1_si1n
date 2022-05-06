@@ -1,4 +1,4 @@
-/* QUESTÃO 01: prepare um relatorio que mostre a madia salarial dos funcionarios de cada departamento. */
+<font color=gray size=72>/* QUESTÃO 01: prepare um relatorio que mostre a madia salarial dos funcionarios de cada departamento. */</font>
 
 SELECT 
 	numero_departamento 	      	                                            AS departamento,
