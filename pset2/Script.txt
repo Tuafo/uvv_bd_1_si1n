@@ -19,8 +19,8 @@ cada departamento, inclua as seguintes informações de seus funcionários: o no
 completo, a data de nascimento, a idade em anos completos e o salário. */
 
 SELECT
-    CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome)                       AS funcionario,
-    d.nome_departamento                                                         AS departamento,
+    CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome)                           AS funcionario,
+    d.nome_departamento                                                             AS departamento,
     f.numero_departamento,
     te.horas
 FROM funcionario f
