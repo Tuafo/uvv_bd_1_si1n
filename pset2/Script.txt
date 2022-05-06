@@ -1,4 +1,4 @@
-/* QUESTÃO 01: prepare um relatorio que mostre a madia salarial dos funcionarios de cada departamento. */
+$color #FFFF00 /* QUESTÃO 01: prepare um relatorio que mostre a madia salarial dos funcionarios de cada departamento. */
 
 SELECT 
 	numero_departamento 	      	                                            AS departamento,
