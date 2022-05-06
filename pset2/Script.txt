@@ -2,7 +2,7 @@
 
 SELECT 
     numero_departamento 	      	                                            AS departamento,
-    AVG(salario)		                                                        AS media_salarial
+    AVG(salario)		                                                    AS media_salarial
 FROM funcionario
 GROUP BY numero_departamento;
 
