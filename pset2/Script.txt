@@ -14,9 +14,9 @@ SELECT
 FROM funcionario
 GROUP BY sexo;
 
-/* QUESTÃO 03: prepare um relatório que liste o nome dos departamentos e, para
-cada departamento, inclua as seguintes informações de seus funcionários: o nome
-completo, a data de nascimento, a idade em anos completos e o salário. */
+/* QUESTÃO 03: prepare um relatorio que liste o nome dos departamentos e, para
+cada departamento, inclua as seguintes informacoes de seus funcionarios: o nome
+completo, a data de nascimento, a idade em anos completos e o salario. */
 
 SELECT
     CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome)                           AS funcionario,
@@ -26,3 +26,35 @@ SELECT
 FROM funcionario f
 INNER JOIN trabalha_em te ON ( te.cpf_funcionario = f.cpf)
 INNER JOIN departamento d ON ( d.numero_departamento = f.numero_departamento);
+
+/* QUESTÃO 04: prepare um relatorio que mostre o nome completo dos funcionarios, 
+a idade em anos completos, o salário atual e o salario com um reajuste que
+obedece ao seguinte criterio: se o salario atual do funcionario e inferior a 35.000 o
+reajuste deve ser de 20%, e se o salario atual do funcionario for igual ou superior a
+35.000 o reajuste deve ser de 15%. */
+
+SELECT 
+ 	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 			                AS nome,
+ 	DATE_PART ('year', NOW()) - DATE_PART ('year', data_nascimento)		            AS idade, 
+	salario 								                                        AS salario_atual, 
+CASE 
+    WHEN salario < 35000 THEN salario + salario * 0.2
+	WHEN salario >= 35000 THEN salario + salario * 0.15 
+END 										                                        AS salario_reajustado
+
+/* QUESTÃO 05: prepare um relatorio que liste, para cada departamento, o nome
+do gerente e o nome dos funcionarios. Ordene esse relatorio por nome do departamento 
+(em ordem crescente) e por salario dos funcionários (em ordem decrescente). */
+
+SELECT 
+ 	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 			                AS nome,
+ 	DATE_PART ('year', NOW()) - DATE_PART ('year', data_nascimento)		            AS idade, 
+	salario 								                                        AS salario_atual, 
+
+CASE 
+	WHEN salario < 35000 THEN salario + salario * 0.2
+	WHEN salario >= 35000 THEN salario + salario * 0.15 
+
+END 										                                        AS salario_reajustado
+FROM funcionario;
+
