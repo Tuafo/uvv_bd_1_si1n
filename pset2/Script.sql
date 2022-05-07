@@ -78,7 +78,8 @@ WHERE d.cpf_funcionario IS NULL;
 
 /* QUESTAO 08: prepare um relatorio que mostre, para cada departamento, 
 os projetos desse departamentoe o nome completo dos funcionarios que estao alocados
-em cada projeto. Alem disso inclua o numero de horas trabalhadas por cada funcionario, em cada projeto. */
+em cada projeto. Alem disso inclua o numero de horas trabalhadas por cada funcionario, 
+em cada projeto. */
 
 SELECT DISTINCT
 	f.numero_departamento 								AS departamento, 
@@ -115,4 +116,79 @@ SELECT
 FROM funcionario
 GROUP BY numero_departamento;
 
+/* QUESTÃO 11: considerando que o valor pago por hora trabalhada em um projeto
+e de 50 reais, prepare um relatorio que mostre o nome completo do funcionario, o
+nome do projeto e o valor total que o funcionario recebera referente as horas 
+trabalhadas naquele projeto. */
 
+SELECT
+	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 				AS funcionario,
+	nome_projeto,
+	SUM(horas) * 50 								AS valor
+FROM funcionario f
+INNER JOIN projeto p ON ( p.numero_departamento = f.numero_departamento)
+INNER JOIN trabalha_em te ON (te.numero_projeto = p.numero_projeto)
+GROUP BY funcionario, nome_projeto
+ORDER BY funcionario ASC;
+
+/* QUESTAO 12: seu chefe esta verificando as horas trabalhadas pelos funcionarios
+nos projetos e percebeu que alguns funcionarios, mesmo estando alocadas a algum
+projeto, nao registraram nenhuma hora trabalhada. Sua tarefa a preparar um relatorio 
+que liste o nome do departamento, o nome do projeto e o nome dos funcionarios
+que, mesmo estando alocados a algum projeto, nao registraram nenhuma hora trabalhada. */
+
+SELECT DISTINCT
+	nome_departamento,
+	nome_projeto,
+	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 				AS funcionario
+FROM funcionario f
+INNER JOIN departamento d ON ( d.numero_departamento = f.numero_departamento)
+INNER JOIN projeto p ON ( p.numero_departamento = d.numero_departamento)
+INNER JOIN trabalha_em te ON ( te.cpf_funcionario = f.cpf)
+WHERE te.horas IS NULL;
+
+/* QUESTAO 13: durante o natal deste ano a empresa ira presentear todos os 
+funcionarios e todos os dependentes (sim, a empresa vai dar um presente para cada
+funcionario e um presente para cada dependente de cada funcionario) e pediu para
+que voce preparasse um relatorio que listasse o nome completo das pessoas a serem
+presenteadas (funcionarios e dependentes), o sexo e a idade em anos completos
+(para poder comprar um presente adequado). Esse relatorio deve estar ordenado
+pela idade em anos completos, de forma decrescente. */
+
+SELECT
+	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 				AS nome_completo,
+	DATE_PART ('year', NOW()) - DATE_PART ('year', data_nascimento) 		AS idade,
+	sexo 										AS genero								
+FROM funcionario 	
+UNION
+SELECT
+	CONCAT(nome_dependente,' ', ultimo_nome),
+	DATE_PART ('year', NOW()) - DATE_PART ('year', d.data_nascimento),
+	d.sexo 					
+FROM dependente d
+INNER JOIN funcionario f ON ( d.cpf_funcionario = f.cpf)
+ORDER BY idade DESC;
+
+/* QUESTAO 14: prepare um relatorio que exiba quantos funcionarios cada departamento tem. */
+
+SELECT
+	f.numero_departamento 								AS numero,
+	d.nome_departamento 								AS departamento,
+	COUNT(cpf) 									AS numero_funcionarios
+FROM funcionario f
+INNER JOIN departamento d ON (d.numero_departamento = f.numero_departamento)
+GROUP BY departamento, f.numero_departamento;
+
+/* QUESTAO 15: como um funcionario pode estar alocado em mais de um projeto,
+prepare um relatorio que exiba o nome completo do funcionario, o departamento
+desse funcionario e o nome dos projetos em que cada funcionario esta alocado.
+Atencao: se houver algum funcionario que nao esta alocado em nenhum projeto,
+o nome completo e o departamento tambem devem aparecer no relatorio. */
+
+SELECT 
+	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome) 				AS nome_completo,
+	nome_departamento,
+	nome_projeto
+FROM funcionario f
+INNER JOIN departamento d ON (d.numero_departamento = f.numero_departamento)
+INNER JOIN projeto p ON (p.numero_departamento = d.numero_departamento);
