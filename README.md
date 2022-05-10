@@ -3,5 +3,5 @@
 ## ***Design e Desenvolvimento de Banco de Dados*** 
 ### ***Aluno***: Thiago Maceno Rocha Goulart
 ### ***Professor***: Abrantes Araujo Silva Filho
-## - ***Pset - Problem Set, oque é?***
+## ***Pset - Problem Set, oque é?***
 Um Problem Set (PSet) é um conjunto de problemas e tarefas difíceis (alguns extremamente difíceis) que o forçarão a estudar e realmente compreender a matéria. 
