@@ -47,7 +47,7 @@ FROM funcionario;
 do gerente e o nome dos funcionarios. Ordene esse relatorio por nome do departamento 
 (em ordem crescente) e por salario dos funcionarios (em ordem decrescente). */
 
-??????????????
+
 
 /* QUESTAO 06: prepare um relatorio que mostre o nome completo dos funcionarios que tem dependentes, 
 o departamento onde eles trabalham e, para cada funcionario, tambem liste o nome completo dos dependentes, 
