@@ -1,4 +1,5 @@
-/* QUESTAO 01: prepare um relatorio que mostre a madia salarial dos funcionarios de cada departamento. */
+/* QUESTAO 01: prepare um relatorio que mostre a madia salarial dos funcionarios 
+de cada departamento. */
 
 SELECT 
 	numero_departamento 	      	                                            	AS departamento,
@@ -6,7 +7,8 @@ SELECT
 FROM funcionario
 GROUP BY numero_departamento;
 
-/* QUESTAO 02: prepare um relatorio que mostre a media salarial dos homens e das mulheres. */
+/* QUESTAO 02: prepare um relatorio que mostre a media salarial dos homens 
+e das mulheres. */
 
 SELECT 
 	sexo 		                                                       		AS genero,
@@ -22,9 +24,9 @@ SELECT
 	CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome)                           AS funcionario,
 	d.nome_departamento                                                             AS departamento,
 	f.numero_departamento,
-	te.horas
+	t.horas
 FROM funcionario f
-INNER JOIN trabalha_em te ON ( te.cpf_funcionario = f.cpf)
+INNER JOIN trabalha_em t ON ( t.cpf_funcionario = f.cpf)
 INNER JOIN departamento d ON ( d.numero_departamento = f.numero_departamento);
 
 /* QUESTAO 04: prepare um relatorio que mostre o nome completo dos funcionarios, 
@@ -49,10 +51,10 @@ do gerente e o nome dos funcionarios. Ordene esse relatorio por nome do departam
 
 
 
-/* QUESTAO 06: prepare um relatorio que mostre o nome completo dos funcionarios que tem dependentes, 
-o departamento onde eles trabalham e, para cada funcionario, tambem liste o nome completo dos dependentes, 
-a idade em anos de cada dependente e o sexo (o sexo NAO DEVE aparecer como M ou F, deve aparecer
-como “Masculino” ou “Feminino”). */
+/* QUESTAO 06: prepare um relatorio que mostre o nome completo dos funcionarios que 
+tem dependentes, o departamento onde eles trabalham e, para cada funcionario, tambem 
+liste o nome completo dos dependentes, a idade em anos de cada dependente e o sexo 
+(o sexo NAO DEVE aparecer como M ou F, deve aparecer como “Masculino” ou “Feminino”). */
 
 SELECT CONCAT(primeiro_nome,' ', nome_meio,' ', ultimo_nome)             		AS nome_completo_funcionario,
 	numero_departamento                                                    		AS departamento,
@@ -102,7 +104,7 @@ SELECT
 	SUM(horas) 									AS horas_trabalhadas
 FROM projeto p
 INNER JOIN departamento d ON ( d.numero_departamento = p.numero_departamento)
-INNER JOIN trabalha_em te ON ( te.numero_projeto = p.numero_projeto)
+INNER JOIN trabalha_em t ON ( t.numero_projeto = p.numero_projeto)
 GROUP BY p.nome_projeto, d.nome_departamento
 ORDER BY p.nome_projeto, d.nome_departamento;
 
@@ -127,7 +129,7 @@ SELECT
 	SUM(horas) * 50 								AS valor
 FROM funcionario f
 INNER JOIN projeto p ON ( p.numero_departamento = f.numero_departamento)
-INNER JOIN trabalha_em te ON (te.numero_projeto = p.numero_projeto)
+INNER JOIN trabalha_em t ON (t.numero_projeto = p.numero_projeto)
 GROUP BY funcionario, nome_projeto
 ORDER BY funcionario ASC;
 
@@ -144,7 +146,7 @@ SELECT DISTINCT
 FROM funcionario f
 INNER JOIN departamento d ON ( d.numero_departamento = f.numero_departamento)
 INNER JOIN projeto p ON ( p.numero_departamento = d.numero_departamento)
-INNER JOIN trabalha_em te ON ( te.cpf_funcionario = f.cpf)
+INNER JOIN trabalha_em t ON ( t.cpf_funcionario = f.cpf)
 WHERE te.horas IS NULL;
 
 /* QUESTAO 13: durante o natal deste ano a empresa ira presentear todos os 
@@ -169,7 +171,8 @@ FROM dependente d
 INNER JOIN funcionario f ON ( d.cpf_funcionario = f.cpf)
 ORDER BY idade DESC;
 
-/* QUESTAO 14: prepare um relatorio que exiba quantos funcionarios cada departamento tem. */
+/* QUESTAO 14: prepare um relatorio que exiba quantos funcionarios 
+cada departamento tem. */
 
 SELECT
 	f.numero_departamento 								AS numero,
