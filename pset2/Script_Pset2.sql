@@ -1,4 +1,3 @@
-
 /* QUESTAO 01: prepare um relatorio que mostre a madia salarial dos funcionarios 
 de cada departamento. */
 
